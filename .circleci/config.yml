@@ -1,0 +1,49 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5
+
+executors:
+  node-executor:
+    docker:
+      - image: circleci/node:latest
+
+jobs:
+  build-node:
+    executor: node/default
+    environment:
+      MONGO_URL: $MONGO_URL
+      TOKEN_SECRET: $TOKEN_SECRET
+      EDGE_STORE_ACCESS_KEY: $EDGE_STORE_ACCESS_KEY
+      EDGE_STORE_SECRET_KEY: $EDGE_STORE_SECRET_KEY
+
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          command: npm run build
+      # - run:
+      #     command: npm test
+
+  deploy:
+    executor: node-executor
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - SHA256:dYXfn3ckS9d+Xu1bigRggd39erp+aiddhQPKuMBXtoA
+      - run:
+          name: Deploy to EC2
+          command: |
+            ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-204-181-195.compute-1.amazonaws.com "cd /home/ubuntu/moviefi && git pull origin main && npm install && npm run build && pm2 restart all"
+      - run: echo "Deployment complete!"
+
+workflows:
+  version: 2
+  build_and_deploy:
+    jobs:
+      - build-node
+      - deploy:
+          requires:
+            - build-node
