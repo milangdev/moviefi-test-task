@@ -15,6 +15,21 @@ interface InputFieldProps {
   className?: string;
 }
 
+/**
+ * A customizable input field component.
+ *
+ * @param {string} id - The id of the input field.
+ * @param {string} type - The type of the input field (e.g. "text", "email", etc.).
+ * @param {string} placeholder - The placeholder text of the input field.
+ * @param {string} value - The value of the input field.
+ * @param {(e: React.ChangeEvent<HTMLInputElement>) => void} onChange - The callback function to be called when the input field value changes.
+ * @param {string} width - The width of the input field.
+ * @param {string} height - The height of the input field.
+ * @param {string} [bgColor] - The background color of the input field.
+ * @param {string} [borderColor] - The border color of the input field.
+ * @param {string} [hoverColor] - The color of the input field when it is focused.
+ * @param {string} [className] - Additional CSS classes to add to the input field.
+ */
 const InputField: React.FC<InputFieldProps> = ({
   id,
   type,
@@ -29,7 +44,7 @@ const InputField: React.FC<InputFieldProps> = ({
   className,
 }) => {
   return (
-    <div>
+    <div className="w-full sm:w-auto">
       <label htmlFor={id} className="sr-only">
         {placeholder}
       </label>

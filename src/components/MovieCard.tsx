@@ -17,8 +17,8 @@ type MovieCardProps = {
  */
 const MovieCard: React.FC<MovieCardProps> = ({ title, year, imageUrl }) => {
   return (
-    <div className="relative w-[260px] md:w-[282px] md:h-[504px] max-w-xs mx-auto bg-cardColor rounded-[12px] overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <div className="relative h-[400px] w-full">
+    <div className=" min-w-[180px] min-h-[334px] md:min-w-[282px] md:h-[504px] max-w-xs mx-auto bg-cardColor rounded-[12px] overflow-hidden hover:shadow-lg transition-shadow duration-300">
+      <div className="relative h-[246px] sm:h-[400px]">
         <Image
           src={imageUrl}
           alt={title}

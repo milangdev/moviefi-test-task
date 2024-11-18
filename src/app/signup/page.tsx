@@ -8,6 +8,14 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { CustomErrorResponse } from "../login/page";
 
+  /**
+   * Renders a signup form and handles the submission of the form to the server.
+   *
+   * If the submission is successful, the user is redirected to the homepage.
+   * If the submission fails, an error message is displayed.
+   *
+   * @returns {JSX.Element} - The signup form component.
+   */
 const SignUp: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -34,6 +42,17 @@ const SignUp: React.FC = () => {
     return true;
   };
 
+/**
+ * Handles the signup form submission.
+ *
+ * Calls the `/api/signup` route with the current email, password, and username.
+ * If the request is successful, redirects the user to the homepage. If the
+ * request fails, displays an error message.
+ *
+ * @param {React.FormEvent<HTMLFormElement>} event - The form event.
+ * @returns {Promise<void>} - A promise that resolves when the signup attempt is
+ * complete.
+ */
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -63,9 +82,9 @@ const SignUp: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen  flex items-center justify-center">
-      <div className="w-full sm:max-w-[300px] sm:h-[360px] max-w-[380px] h-[336px]  space-y-6 ">
-        <h1 className="text-white text-[64px] font-[600] leading-[80px] text-center underline-from-font decoration-skip-ink-none">
+    <div className="min-h-[calc(100vh-111px)] flex items-center justify-center w-[380px] h-[336px] sm:w-[300px] sm:h-[360px] mx-[24px]">
+      <div className="w-full space-y-6 ">
+        <h1 className="text-white text-[48px] sm:text-[64px] font-[600] leading-[56px] sm:leading-[80px] text-center underline-from-font decoration-skip-ink-none">
           Sign up
         </h1>
 
@@ -73,10 +92,10 @@ const SignUp: React.FC = () => {
           <InputField
             id="username"
             type="text"
-            placeholder="username"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            width="sm:w-[300px] w-[380px]"
+            width="w-full"
             height="h-[45px]"
             bgColor="bg-inputColor"
             className="focus:outline-none focus:ring-2 focus:ring-primary"
@@ -88,7 +107,7 @@ const SignUp: React.FC = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            width="sm:w-[300px] w-[380px]"
+            width="w-full"
             height="h-[45px]"
             bgColor="bg-inputColor"
             className="focus:outline-none focus:ring-2 focus:ring-primary"
@@ -100,7 +119,7 @@ const SignUp: React.FC = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            width="sm:w-[300px] w-[380px]"
+            width="w-full"
             height="h-[45px]"
             bgColor="bg-inputColor"
             className="focus:outline-none focus:ring-2 focus:ring-primary"
@@ -121,7 +140,7 @@ const SignUp: React.FC = () => {
 
           <Button
             type="submit"
-            width="sm:w-[300px] w-[380px]"
+            width="w-full"
             height="h-[54px]"
             bgColor="bg-primary"
             hoverColor="hover:bg-green-600"
